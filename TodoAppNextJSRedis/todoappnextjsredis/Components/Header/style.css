@@ -4,7 +4,12 @@
     transition: all .5s !important;
 }
 
+.nav-link {
+    border-bottom: 1px solid transparent !important;
+}
+
 .nav-link:hover {
-    color: rgb(69, 28, 236) !important;
-    transition: 0.4s linear !important;
+    color: rgb(236, 28, 56) !important;
+    border-bottom: 1px solid rgb(236, 28, 56) !important;
+    transition: 0.5s linear !important;
 }

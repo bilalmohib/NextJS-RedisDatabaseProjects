@@ -13,7 +13,7 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         {/* Navbar brand */}
                         <a className="navbar-brand mt-2 mt-lg-0" href="#">
-                            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height={15} alt="MDB Logo" loading="lazy" />
+                            <img src="/logo.png" height={45} title="Redis :) The most loved developers database." alt="Redis" loading="lazy" />
                         </a>
                         {/* Left links */}
                         <ul className="navbar-nav fill me-auto mb-2 mb-lg-0">
@@ -34,6 +34,9 @@ const Header = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" target="_blank" title="Redis Users" href="https://redis.io/docs/about/users/">Redis Users</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" target="_blank" title="Redis is one of the most loved database on stack overflow survey.Lets check" href="https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-database-love-dread">Most Loved</a>
                             </li>
                         </ul>
                         {/* Left links */}
