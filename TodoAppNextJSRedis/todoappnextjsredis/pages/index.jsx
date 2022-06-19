@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 //Importing Compoents
-import Header from '../components/Header';
+import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import TodoList from '../Components/Home/TodoList';
 
