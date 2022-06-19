@@ -16,9 +16,9 @@ const Header = () => {
                             <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height={15} alt="MDB Logo" loading="lazy" />
                         </a>
                         {/* Left links */}
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav fill me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Dashboard</a>
+                                <a className="nav-link" href="#">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" target="_blank" title="Learn Redis" href="https://university.redis.com/">Learn Redis</a>

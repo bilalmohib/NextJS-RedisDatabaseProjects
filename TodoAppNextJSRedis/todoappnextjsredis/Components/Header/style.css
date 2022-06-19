@@ -1,0 +1,10 @@
+.nav-link,
+.nav-link:after,
+.nav-link:before {
+    transition: all .5s !important;
+}
+
+.nav-link:hover {
+    color: rgb(69, 28, 236) !important;
+    transition: 0.4s linear !important;
+}

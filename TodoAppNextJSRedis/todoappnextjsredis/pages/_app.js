@@ -1,11 +1,14 @@
 import Head from 'next/head';
 import Script from 'next/script';
 
-//Importing CSS Files
+//Importing Containers CSS Files
 import '../styles/globals.css';
 import "../styles/ContainerCss/Home.css";
+
+//Importing Component CSS Files
 import "../Components/Home/TodoList/style.css";
 import "../Components/Footer/style.css";
+import "../Components/Header/style.css";
 
 function MyApp({ Component, pageProps }) {
   return <>
