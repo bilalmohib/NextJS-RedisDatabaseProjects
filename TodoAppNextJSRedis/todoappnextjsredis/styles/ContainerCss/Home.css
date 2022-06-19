@@ -1,0 +1,20 @@
+.form_styling {
+    width: 70%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.addItemInput {
+    width: 85%;
+    margin-right: 1%;
+}
+
+.todoListContainer{
+    width: 70%;
+    background-color: #dbd8f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+}

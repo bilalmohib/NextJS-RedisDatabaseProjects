@@ -1,6 +1,11 @@
 import Head from 'next/head';
 import Script from 'next/script';
-import '../styles/globals.css'
+
+//Importing CSS Files
+import '../styles/globals.css';
+import "../styles/ContainerCss/Home.css";
+import "../Components/Home/TodoList/style.css";
+import "../Components/Footer/style.css";
 
 function MyApp({ Component, pageProps }) {
   return <>
