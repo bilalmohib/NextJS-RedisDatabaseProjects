@@ -23,23 +23,27 @@ app.get('/todo', async (req, res) => {
 });
 
 app.post('/todo', async (req, res) => {
-    const task = taskRepository.createEntity();
+    const todo = taskRepository.createEntity();
 
-    task.title = req.body.name;
-    task.timeSubmitted = new Date().toLocaleString();
-    task.complete = false;
-    task.id = await taskRepository.save(task);
+    todo.title = req.body.title;
+    todo.timeSubmitted = req.body.timeSubmitted;
+    todo.completed = req.body.completed;
+    todo.id = await taskRepository.save(todo);
 
-    res.send(task);
+    res.send(todo);
 });
 
 app.put('/todo/:id', async (req, res) => {
-    const task = await taskRepository.fetch(req.params.id);
+    const todo = await taskRepository.fetch(req.params.id);
 
-    task.complete = req.body.complete;
-    await taskRepository.save(task);
+    //Update values
+    todo.title = req.body.title;
+    todo.completed = req.body.completed;
+    todo.timeSubmitted = req.body.timeSubmitted;
 
-    res.send(task);
+    await taskRepository.save(todo);
+
+    res.send(todo);
 });
 
 app.delete('/todo/:id', async (req, res) => {

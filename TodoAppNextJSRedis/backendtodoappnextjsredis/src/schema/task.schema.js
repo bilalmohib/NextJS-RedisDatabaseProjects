@@ -1,24 +1,24 @@
 import {Entity, Schema} from "redis-om";
 
-class Task extends Entity {
+class Todo extends Entity {
     toJSON() {
         return {
             id: this.entityId,
             title: this.title,
             timeSubmitted: this.timeSubmitted,
-            complete: this.complete
+            completed: this.completed
         }
     }
 }
 
-export const taskSchema = new Schema(Task, {
+export const taskSchema = new Schema(Todo, {
     title: {
         type: 'string'
     },
     timeSubmitted:{
         type: 'string'
     },
-    complete: {
+    completed: {
         type: 'boolean'
     }
 }, {

@@ -10,6 +10,7 @@ export default function Home() {
 
   const [addTodoValue, setAddTodoValue] = useState('');
   const [todoList, setTodoList] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -17,12 +18,12 @@ export default function Home() {
 
       const content = await response.json();
 
-      setTasks(content);
+      setTodoList(content);
     })();
   }, []);
 
   useEffect(() => {
-    console.log(`The tasks are equal to : ${todoList}`);
+    console.log(`The TodoList is equal to : ${todoList}`);
   })
 
   const handleAddTodo = async (e) => {
@@ -33,7 +34,9 @@ export default function Home() {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          addTodoValue
+          title: addTodoValue,
+          timeSubmitted: new Date().toLocaleString(),
+          completed: isCompleted
         })
       });
 
@@ -47,23 +50,6 @@ export default function Home() {
   }
 
   const update = async (id, checked) => {
-    await fetch(`http://localhost:8000/todo/${id}`, {
-      method: "PUT",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        complete: checked
-      })
-    });
-  }
-
-  const del = async id => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      await fetch(`http://localhost:8000/todo/${id}`, {
-        method: 'DELETE'
-      });
-
-      setTodoList(todoList.filter(t => t.id !== id));
-    }
   }
 
   return (
@@ -95,7 +81,18 @@ export default function Home() {
                 todoList.map((item, index) => {
                   return (
                     <div key={index}>
-                      <TodoList index={index} title={item.name} />
+                      <TodoList
+                        id={item.id}
+                        index={index}
+                        title={item.title}
+                        timeSubmitted={item.timeSubmitted}
+                        completed={item.completed}
+                        //Passing States
+                        todoList={todoList}
+                        setTodoList={setTodoList}
+                        isCompleted={isCompleted}
+                        setIsCompleted={setIsCompleted}
+                      />
                     </div>
                   )
                 })
