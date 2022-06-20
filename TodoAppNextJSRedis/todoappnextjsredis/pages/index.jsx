@@ -15,9 +15,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const response = await fetch('http://localhost:8000/todo');
-
       const content = await response.json();
-
       setTodoList(content);
     })();
   }, []);
@@ -47,9 +45,6 @@ export default function Home() {
     } else {
       alert('Please enter a value to add to TodoList');
     }
-  }
-
-  const update = async (id, checked) => {
   }
 
   return (
