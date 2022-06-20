@@ -8,12 +8,12 @@ import TodoList from '../Components/Home/TodoList';
 
 export default function Home() {
 
-  const [name, setName] = useState('');
-  const [tasks, setTasks] = useState([]);
+  const [addTodoValue, setAddTodoValue] = useState('');
+  const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('http://localhost:8000/tasks');
+      const response = await fetch('http://localhost:8000/todo');
 
       const content = await response.json();
 
@@ -22,54 +22,32 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(`The tasks are equal to : ${tasks}`);
+    console.log(`The tasks are equal to : ${todoList}`);
   })
 
-  const handleAddTodo = async e => {
-    if (name.length > 0) {
+  const handleAddTodo = async (e) => {
+    if (addTodoValue.length > 0) {
       e.preventDefault();
 
-      const response = await fetch('http://localhost:8000/tasks', {
+      const response = await fetch('http://localhost:8000/todo', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name
+          addTodoValue
         })
       });
 
-      const task = await response.json();
+      const todo = await response.json();
 
-      setTasks([...tasks, task]);
-      alert(`The value will be added to TodoList: ${name}`);
-    } else {
-      alert('Please enter a value to add to TodoList');
-    }
-  }
-
-  //Databases ke kaam
-  const create = async e => {
-    if (name.length > 0) {
-      e.preventDefault();
-
-      const response = await fetch('http://localhost:8000/tasks', {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name
-        })
-      });
-
-      const task = await response.json();
-
-      setTasks([...tasks, task]);
-      alert(`The value will be added to TodoList: ${name}`);
+      setTodoList([...todoList, todo]);
+      alert(`The value will be added to TodoList: ${addTodoValue}`);
     } else {
       alert('Please enter a value to add to TodoList');
     }
   }
 
   const update = async (id, checked) => {
-    await fetch(`http://localhost:8000/tasks/${id}`, {
+    await fetch(`http://localhost:8000/todo/${id}`, {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -80,11 +58,11 @@ export default function Home() {
 
   const del = async id => {
     if (window.confirm('Are you sure you want to delete this task?')) {
-      await fetch(`http://localhost:8000/tasks/${id}`, {
+      await fetch(`http://localhost:8000/todo/${id}`, {
         method: 'DELETE'
       });
 
-      setTasks(tasks.filter(t => t.id !== id));
+      setTodoList(todoList.filter(t => t.id !== id));
     }
   }
 
@@ -101,10 +79,10 @@ export default function Home() {
           <div className={`col-12`}>
             <br />
             <h1 className='text-center text-info'>NextJS & Redis Based Todo App</h1>
-            <form className='form_styling' onSubmit={create}>
+            <form className='form_styling' onSubmit={handleAddTodo}>
               <div className='d-flex'>
                 <div className='addItemInput'>
-                  <input className='form-control w-80' placeholder='Please Type Any Value to Add to the Todo' onChange={(e) => setName(e.target.value)} type="text" />
+                  <input className='form-control w-80' placeholder='Please Type Any Value to Add to the Todo' onChange={(e) => setAddTodoValue(e.target.value)} type="text" />
                 </div>
                 <button className='btn btn-dark' type="submit">Add Item</button>
               </div>
@@ -114,10 +92,10 @@ export default function Home() {
 
             <div className='todoListContainer'>
               {
-                ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].map((item, index) => {
+                todoList.map((item, index) => {
                   return (
                     <div key={index}>
-                      <TodoList index={index} title={item} />
+                      <TodoList index={index} title={item.name} />
                     </div>
                   )
                 })

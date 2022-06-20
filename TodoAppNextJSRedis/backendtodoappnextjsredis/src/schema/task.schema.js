@@ -4,14 +4,18 @@ class Task extends Entity {
     toJSON() {
         return {
             id: this.entityId,
-            name: this.name,
+            title: this.title,
+            timeSubmitted: this.timeSubmitted,
             complete: this.complete
         }
     }
 }
 
 export const taskSchema = new Schema(Task, {
-    name: {
+    title: {
+        type: 'string'
+    },
+    timeSubmitted:{
         type: 'string'
     },
     complete: {
