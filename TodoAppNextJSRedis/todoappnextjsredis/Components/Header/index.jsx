@@ -61,7 +61,7 @@ const Header = () => {
                                     <a className="dropdown-item" title="Github Profile" href="https://github.com/Muhammad-Bilal-7896/">Github</a>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" title="Upwork Profile" href="https://www.upwork.com/freelancers/~013a136c7081592898">Upwork</a>
+                                    <a className="dropdown-item" title="Email" href = "mailto:bilalmohib7896@gmail.com">bilalmohib7896@gmail.com</a>
                                 </li>
                             </ul>
                         </div>

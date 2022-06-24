@@ -6,8 +6,7 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import TodoList from '../Components/Home/TodoList';
 
-export default function Home() {
-
+function Home() {
   const [addTodoValue, setAddTodoValue] = useState('');
   const [todoList, setTodoList] = useState([]);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -102,3 +101,4 @@ export default function Home() {
     </div>
   )
 }
+export default Home;

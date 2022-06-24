@@ -23,7 +23,7 @@ const TodoList = (props) => {
                     body: JSON.stringify({
                         completed: !completed,
                         title: editValue,
-                        timeSubmitted: new Date().toLocaleString()
+                        timeSubmitted: timeSubmitted
                     })
                 });
                 let tempList = []
@@ -44,7 +44,7 @@ const TodoList = (props) => {
                     body: JSON.stringify({
                         completed: completed,
                         title: editValue,
-                        timeSubmitted: timeSubmitted
+                        timeSubmitted: new Date().toLocaleString()
                     })
                 });
                 let tempList = []
