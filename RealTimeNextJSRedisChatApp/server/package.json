@@ -1,0 +1,35 @@
+{
+  "name": "backendtodoappnextjsredis",
+  "version": "1.0.0",
+  "description": "Backend based in redis database and nodejs and express",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
+  },
+  "keywords": [
+    "redis",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Muhammad-Bilal-7896",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.19",
+    "redis-om": "^0.3.4",
+    "supertest": "^6.2.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

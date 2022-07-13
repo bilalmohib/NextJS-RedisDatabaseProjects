@@ -1,0 +1,17 @@
+/* Components\Header\style.css */
+
+.nav-link,
+.nav-link:after,
+.nav-link:before {
+    transition: all .5s !important;
+}
+
+.nav-link {
+    border-bottom: 1px solid transparent !important;
+}
+
+.nav-link:hover {
+    color: rgb(236, 28, 56) !important;
+    border-bottom: 1px solid rgb(236, 28, 56) !important;
+    transition: 0.5s linear !important;
+}

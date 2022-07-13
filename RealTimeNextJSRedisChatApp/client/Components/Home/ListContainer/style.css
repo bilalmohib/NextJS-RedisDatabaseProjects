@@ -1,0 +1,13 @@
+/* Components\Home\TodoList\style.css */
+
+.containerListing {
+    width: 70%;
+    background-color: #e6e9ed;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: left;
+    margin-top: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

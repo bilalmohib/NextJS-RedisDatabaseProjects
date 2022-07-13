@@ -1,0 +1,21 @@
+.comment-container {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 0.5px;
+    box-shadow: 0 0 5px #000;
+    padding: 10px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.comment-container .comment-header {
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(64, 64, 64);
+}
+
+.comment-container .comment-header b {
+    font-weight: bold;
+}
