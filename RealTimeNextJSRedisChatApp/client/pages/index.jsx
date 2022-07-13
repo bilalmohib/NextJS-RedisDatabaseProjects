@@ -48,7 +48,7 @@ function AddListing() {
   function fetchDataFromAPIGET() {
     if (typeof window !== "undefined") {
       (async () => {
-        const response = await fetch('http://localhost:8000/listing', {
+        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
           method: 'GET',
           headers: {
             accept: 'application/json',
@@ -63,7 +63,7 @@ function AddListing() {
   function fetchDataFromAPIGETOfUsers() {
     if (typeof window !== "undefined") {
       (async () => {
-        const response = await fetch('http://localhost:8000/user/', {
+        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user/', {
           method: 'GET',
           headers: {
             accept: 'application/json',
@@ -138,7 +138,7 @@ function AddListing() {
     e.preventDefault();
     if (category !== '' && title !== '' && description !== '' && loggedUserData !== null) {
       e.preventDefault();
-      const response = await fetch('http://localhost:8000/listing', {
+      const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

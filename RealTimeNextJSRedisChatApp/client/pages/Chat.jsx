@@ -12,6 +12,8 @@ function Chat() {
 
     const [chatList, setChatList] = useState([]);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const [currentSelectedUser, setCurrentSelectedUser] = useState(null);
 
     //VALUES
@@ -42,7 +44,7 @@ function Chat() {
     function fetchDataFromAPIGetChat() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('http://localhost:8000/chat', {
+                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/chat', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -57,7 +59,7 @@ function Chat() {
     function fetchDataFromAPIGETOfUsers() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('http://localhost:8000/user/', {
+                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user/', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -97,6 +99,10 @@ function Chat() {
             setIsSSR(false);
         }
 
+        if (chatList.length !== 0) {
+            setIsLoaded(true);
+        }
+
         console.log("The signedIn User is equal to :-=-=-=-=-=-= OBJ=> ", getLoggedInUserData("loggedInUserData"));
 
         //Getting user data from local storage
@@ -123,7 +129,7 @@ function Chat() {
         // isUserOnline:this.isUserOnline
 
         if (message !== '' && currentSelectedUser !== null && localStorage.getItem('loggedInUserData') !== null && isSSR === true) {
-            const response = await fetch('http://localhost:8000/chat', {
+            const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/chat', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -163,132 +169,134 @@ function Chat() {
                 <div className='chatContainer'>
                     {(isSSR) ? (
                         <>
-                            {(localStorage.getItem('loggedInUserData') !== null || isSignedIn !== false) ? (
-                                <div>
-                                    {(userData !== null) ? (
-                                        <>
-                                            <div className='containerChattingSidebar'>
-                                                <h4 className='text-center text-dark mt-4'>👋 Welcome {JSON.parse(localStorage.getItem('loggedInUserData')).name}!</h4>
+                            {(isLoaded) ? (
+                                <>
+                                    {(localStorage.getItem('loggedInUserData') !== null || isSignedIn !== false) ? (
+                                        <div>
+                                            {(userData !== null) ? (
+                                                <>
+                                                    <div className='containerChattingSidebar'>
+                                                        <h4 className='text-center text-dark mt-4'>👋 Welcome {JSON.parse(localStorage.getItem('loggedInUserData')).name}!</h4>
 
-                                                <div className="text-center mb-4 mt-4">
-                                                    <button className='btn btn-danger'
-                                                        onClick={() => {
-                                                            localStorage.removeItem('loggedInUserData');
-                                                            setIsSignedIn(false);
-                                                            window.location.reload();
-                                                            alert("You are logged out Successfully!");
-                                                            // setLoggedInUserData(null);
-                                                            // Router.push('/');
-                                                        }}
-                                                    >
-                                                        Logout
-                                                    </button>
-                                                </div>
-                                                <h5 className="text-left mb-4" style={{ paddingLeft: "20px", paddingRight: "20px" }}>🔘 Select a User to start the chat</h5>
-                                                {
-                                                    userData.map((item, index) => {
-                                                        return (
-                                                            <div key={index}>
-                                                                {(item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
-                                                                    <div className="chatUsersBox" key={index}>
-                                                                        <UsersList
-                                                                            index={index}
-                                                                            // name: this.name,
-                                                                            // password: this.password,
-                                                                            // timeRegistered: this.timeRegistered,
-                                                                            // isSignedIn: this.isSignedIn
+                                                        <div className="text-center mb-4 mt-4">
+                                                            <button className='btn btn-danger'
+                                                                onClick={() => {
+                                                                    localStorage.removeItem('loggedInUserData');
+                                                                    setIsSignedIn(false);
+                                                                    window.location.reload();
+                                                                    alert("You are logged out Successfully!");
+                                                                    // setLoggedInUserData(null);
+                                                                    // Router.push('/');
+                                                                }}
+                                                            >
+                                                                Logout
+                                                            </button>
+                                                        </div>
+                                                        <h5 className="text-left mb-4" style={{ paddingLeft: "20px", paddingRight: "20px" }}>🔘 Select a User to start the chat</h5>
+                                                        {
+                                                            userData.map((item, index) => {
+                                                                return (
+                                                                    <div key={index}>
+                                                                        {(item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
+                                                                            <div className="chatUsersBox" key={index}>
+                                                                                <UsersList
+                                                                                    index={index}
+                                                                                    // name: this.name,
+                                                                                    // password: this.password,
+                                                                                    // timeRegistered: this.timeRegistered,
+                                                                                    // isSignedIn: this.isSignedIn
 
-                                                                            //VALUES
-                                                                            id={item.id}
-                                                                            name={item.name}
-                                                                            timeRegistered={item.timeRegistered}
+                                                                                    //VALUES
+                                                                                    id={item.id}
+                                                                                    name={item.name}
+                                                                                    timeRegistered={item.timeRegistered}
 
-                                                                            //OTER Important Props
-                                                                            loggedInUserName={JSON.parse(localStorage.getItem('loggedInUserData')).name}
-                                                                            //FUNCTIONS
-                                                                            chatList={chatList}
-                                                                            setChatList={setChatList}
+                                                                                    //OTER Important Props
+                                                                                    loggedInUserName={JSON.parse(localStorage.getItem('loggedInUserData')).name}
+                                                                                    //FUNCTIONS
+                                                                                    chatList={chatList}
+                                                                                    setChatList={setChatList}
 
-                                                                            currentSelectedUser={currentSelectedUser}
-                                                                            setCurrentSelectedUser={setCurrentSelectedUser}
-                                                                        // userData={userData}
-                                                                        />
+                                                                                    currentSelectedUser={currentSelectedUser}
+                                                                                    setCurrentSelectedUser={setCurrentSelectedUser}
+                                                                                // userData={userData}
+                                                                                />
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
                                                                     </div>
-                                                                ) : (
-                                                                    <></>
-                                                                )}
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                            <div className='containerChattingContainer'>
-                                                <div className="topChatSelectedUserInfoBox">
-                                                    <h3 className="text-primary mt-2 ml-2">&nbsp; Current User Selected to Chat = {(currentSelectedUser === null) ? ("No User Selected") : (currentSelectedUser.name)} </h3>
-                                                </div>
-                                                <div className="containerMainChat">
-                                                    <br /><br /><br />
-                                                    <div className="d-flex flex-row ml-2">
-                                                        <div>
-                                                            {(chatList !== null && isSSR === true) ? (
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <div className='containerChattingContainer'>
+                                                        <div className="topChatSelectedUserInfoBox">
+                                                            <h3 className="text-primary mt-2 ml-2">&nbsp; Current User Selected to Chat = {(currentSelectedUser === null) ? ("No User Selected") : (currentSelectedUser.name)} </h3>
+                                                        </div>
+                                                        <div className="containerMainChat">
+                                                            <br /><br /><br />
+                                                            <div className="d-flex flex-row ml-2">
                                                                 <div>
-                                                                    {(currentSelectedUser !== null) ? (
-                                                                        <>
-                                                                            {
-                                                                                chatList.map((item, index) => {
-                                                                                    return (
-                                                                                        <div key={index} className="mt-2">
-                                                                                            {(item.userIDSender === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDReceiver === currentSelectedUser.id) ? (
-                                                                                                <>
-                                                                                                    <div className="insideMainContainerChatSender" key={index}>
-                                                                                                        <h3>Sent</h3>
-                                                                                                        <div className="chatBoxHeader">
-                                                                                                            <h5 className="text-primary">{item.userNameSender}</h5>
-                                                                                                            <h6 className="text-secondary">{item.timeSent}</h6>
-                                                                                                        </div>
-                                                                                                        <div className="chatBoxBody">
-                                                                                                            <p className="text-dark">{item.message}</p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </>
-                                                                                            ) : (
-                                                                                                <></>
-                                                                                            )}
-
-                                                                                            {(item.userIDReceiver === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDSender === currentSelectedUser.id) ? (
-                                                                                                <>
-                                                                                                    <div className="insideMainContainerChatReceiver" key={index}>
-                                                                                                        <h3>Received</h3>
-                                                                                                        <div className="chatBoxHeader">
-                                                                                                            <h5 className="text-primary">{item.userNameSender}</h5>
-                                                                                                            <h6 className="text-secondary">{item.timeSent}</h6>
-                                                                                                        </div>
-                                                                                                        <div className="chatBoxBody">
-                                                                                                            <p className="text-dark">{item.message}</p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </>
-                                                                                            ) : (
-                                                                                                <></>
-                                                                                            )}
-                                                                                        </div>
-                                                                                    )
-                                                                                })
-                                                                            }
-                                                                        </>
-                                                                    ) : (
+                                                                    {(chatList !== null && isSSR === true) ? (
                                                                         <div>
-                                                                            <h5 className="text-center text-dark">No User Selected. Please select a user to chat</h5>
+                                                                            {(currentSelectedUser !== null) ? (
+                                                                                <>
+                                                                                    {
+                                                                                        chatList.map((item, index) => {
+                                                                                            return (
+                                                                                                <div key={index} className="mt-2">
+                                                                                                    {(item.userIDSender === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDReceiver === currentSelectedUser.id) ? (
+                                                                                                        <>
+                                                                                                            <div className="insideMainContainerChatSender" key={index}>
+                                                                                                                <h3>Sent</h3>
+                                                                                                                <div className="chatBoxHeader">
+                                                                                                                    <h5 className="text-primary">{item.userNameSender}</h5>
+                                                                                                                    <h6 className="text-secondary">{item.timeSent}</h6>
+                                                                                                                </div>
+                                                                                                                <div className="chatBoxBody">
+                                                                                                                    <p className="text-dark">{item.message}</p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </>
+                                                                                                    ) : (
+                                                                                                        <></>
+                                                                                                    )}
+
+                                                                                                    {(item.userIDReceiver === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDSender === currentSelectedUser.id) ? (
+                                                                                                        <>
+                                                                                                            <div className="insideMainContainerChatReceiver" key={index}>
+                                                                                                                <h3>Received</h3>
+                                                                                                                <div className="chatBoxHeader">
+                                                                                                                    <h5 className="text-primary">{item.userNameSender}</h5>
+                                                                                                                    <h6 className="text-secondary">{item.timeSent}</h6>
+                                                                                                                </div>
+                                                                                                                <div className="chatBoxBody">
+                                                                                                                    <p className="text-dark">{item.message}</p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </>
+                                                                                                    ) : (
+                                                                                                        <></>
+                                                                                                    )}
+                                                                                                </div>
+                                                                                            )
+                                                                                        })
+                                                                                    }
+                                                                                </>
+                                                                            ) : (
+                                                                                <div>
+                                                                                    <h5 className="text-center text-dark">No User Selected. Please select a user to chat</h5>
+                                                                                </div>
+                                                                            )}
                                                                         </div>
+                                                                    ) : (
+                                                                        <h3 className="text-primary">No Messages Yet</h3>
                                                                     )}
                                                                 </div>
-                                                            ) : (
-                                                                <h3 className="text-primary">No Messages Yet</h3>
-                                                            )}
-                                                        </div>
-                                                    </div>
+                                                            </div>
 
-                                                    {/* <div className="d-flex flex-row-reverse mr-2">
+                                                            {/* <div className="d-flex flex-row-reverse mr-2">
                                                         <div className="insideMainContainerChatReceiver">
                                                             <h3>Message: Hello World</h3>
                                                             <h6>Send by: Muhammad Bilal</h6>
@@ -296,28 +304,38 @@ function Chat() {
                                                         </div>
                                                     </div> */}
 
-                                                </div>
-                                                <div className="containerMessageInput">
-                                                    <input className="form-control messageInput" type="text" placeholder="Enter the message here .... " value={message} onChange={(e) => setMessage(e.target.value)} title="Enter" />
-                                                    <button className="btn btn-primary btn-lg" onClick={sendMessage}>Send <i className="fas fa-paper-plane"></i></button>
-                                                </div>
-                                            </div>
-                                        </>
+                                                        </div>
+                                                        <div className="containerMessageInput">
+                                                            <input className="form-control messageInput" type="text" placeholder="Enter the message here .... " value={message} onChange={(e) => setMessage(e.target.value)} title="Enter" />
+                                                            <button className="btn btn-primary btn-lg" onClick={sendMessage}>Send <i className="fas fa-paper-plane"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <h3 className="text-success text-center">No Users Here <a href="/AddListing">Register Here</a></h3>
+                                                </>
+                                            )}
+                                        </div>
                                     ) : (
-                                        <>
-                                            <h3 className="text-success text-center">No Users Here <a href="/AddListing">Register Here</a></h3>
-                                        </>
+                                        <div>
+                                            <div className="text-center">
+                                                <br /><br /><br /><br /><br /><br /><br /><br />
+                                                <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
+                                                <a href="/Login">Login Now</a>
+                                            </div>
+                                            <br />
+                                        </div>
                                     )}
-                                </div>
+                                </>
                             ) : (
-                                <div>
-                                    <div className="text-center">
-                                        <br /><br /><br /><br /><br /><br /><br /><br />
-                                        <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
-                                        <a href="/Login">Login Now</a>
+                                <>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="spinner-border" role="status">
+                                            <h3 class="sr-only">Please wait Fetching Data from Backend Loading...</h3>
+                                        </div>
                                     </div>
-                                    <br />
-                                </div>
+                                </>
                             )}
                         </>
                     ) : (

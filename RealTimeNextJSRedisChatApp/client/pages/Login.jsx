@@ -38,7 +38,7 @@ function Login() {
     function fetchUsersData() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('http://localhost:8000/user', {
+                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',

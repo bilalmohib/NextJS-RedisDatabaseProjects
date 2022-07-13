@@ -56,7 +56,7 @@ function Register() {
     function fetchUsersData() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('http://localhost:8000/user', {
+                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -98,7 +98,7 @@ function Register() {
     const registerUsersData = async (event) => {
         event.preventDefault();
         if (name !== '' && password !== '' && loggedUserData !== null && duplicate === false) {
-            const response = await fetch('http://localhost:8000/user', {
+            const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -203,7 +203,6 @@ function Register() {
                                 })
                             }
                         </div> */}
-
                     </div>
                 </div>
             </div>
