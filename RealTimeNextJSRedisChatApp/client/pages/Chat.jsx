@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import Image from 'next/image';
+import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
-import ListContainer from '../Components/Home/ListContainer';
 import UsersList from "../Components/Chat/UsersList";
 
 function Chat() {
@@ -313,7 +311,11 @@ function Chat() {
                                                 </>
                                             ) : (
                                                 <>
-                                                    <h3 className="text-success text-center">No Users Here <a href="/AddListing">Register Here</a></h3>
+                                                    <h3 className="text-success text-center">No Users Here
+                                                        <Link href="/AddListing">
+                                                            <a>Register Here</a>
+                                                        </Link>
+                                                    </h3>
                                                 </>
                                             )}
                                         </div>
@@ -322,7 +324,9 @@ function Chat() {
                                             <div className="text-center">
                                                 <br /><br /><br /><br /><br /><br /><br /><br />
                                                 <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
-                                                <a href="/Login">Login Now</a>
+                                                <Link href="/Login">
+                                                    <a>Login Now</a>
+                                                </Link>
                                             </div>
                                             <br />
                                         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Router from 'next/router'
 import Head from 'next/head';
+import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
@@ -174,7 +175,7 @@ function Register() {
                                 <button type="submit" className="btn btn-primary btn-block mb-4">Register</button>
                                 {/* Register buttons */}
                                 <div className="text-center">
-                                    <p>Already Registered ? <a href="/Login">Login</a></p>
+                                    <p>Already Registered ? <Link href="/Login">Login</Link></p>
                                 </div>
                             </fieldset>
                         </form>
