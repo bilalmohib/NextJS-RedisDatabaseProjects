@@ -4,8 +4,7 @@ module.exports = {
     return [
       {
         // matching all API routes
-        source: "/api/:path*",
-        source:'https://redisdatabasebackend.as.r.appspot.com/',
+        source: "/https://redisdatabasebackend.as.r.appspot.com/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
