@@ -5,6 +5,7 @@ This repository contains the projects built with
 - Next JS
 - Node JS
 - Express
+- Google Cloud
 
 # Projects 
 
@@ -13,4 +14,9 @@ The following is the list of projects this repository contains:-
 - [Source Code](https://github.com/Muhammad-Bilal-7896/NextJS-RedisDatabaseProjects/tree/master/TodoAppNextJSRedis)
 - [Live Preview](https://todoappnextjsredis.vercel.app/)
 - [Blog](https://www.linkedin.com/pulse/how-develop-todo-app-next-js-redis-database-from-scratch-bilal/?trackingId=hRO1JjHsSBC18MIHrjqU4A%3D%3D)
+
+## 1) Chat Application
+- [Source Code](https://github.com/Muhammad-Bilal-7896/NextJS-RedisDatabaseProjects/tree/master/RealTimeNextJSRedisChatApp)
+<!-- - [Live Preview In Progress]()
+- [Blog In Working]() -->
 
