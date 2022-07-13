@@ -1,7 +1,7 @@
 
 # 🏁 Getting Started with the server Backend of Chat Application API 
 
-## 🤔 What is the DaveListBackEnd API? 
+## 🤔 What is the ChatApplication Backend API? 
 It is the API that allows you to fetch,update,delete and perform CRUD operations for the DaveList API using redis memory cache database that used in the project.This is a Restful API for the Redis Memory Cache Database so that it can be used with the frontEnd.It is basically used at the front end of DaveListApp.
 
 ## 🧪 Tools used for Testing
