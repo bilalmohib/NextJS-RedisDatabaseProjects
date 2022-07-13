@@ -334,9 +334,9 @@ function Chat() {
                                 </>
                             ) : (
                                 <>
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border" role="status">
-                                            <h3 class="sr-only">Please wait Fetching Data from Backend Loading...</h3>
+                                    <div className="d-flex justify-content-center">
+                                        <div className="spinner-border" role="status">
+                                            <h3 className="sr-only">Please wait Fetching Data from Backend Loading...</h3>
                                         </div>
                                     </div>
                                 </>
