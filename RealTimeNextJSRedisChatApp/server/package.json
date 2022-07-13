@@ -1,5 +1,5 @@
 {
-  "name": "backendtodoappnextjsredis",
+  "name": "backendchatappnextjsredis",
   "version": "1.0.0",
   "description": "Backend based in redis database and nodejs and express",
   "main": "index.js",
