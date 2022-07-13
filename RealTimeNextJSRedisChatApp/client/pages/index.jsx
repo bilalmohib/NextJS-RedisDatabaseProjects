@@ -1,21 +1,10 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import Image from 'next/image';
+import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ListContainer from '../Components/Home/ListContainer';
-
-{/* <li onClick={()=>setCategory('News')}><a className="dropdown-item" href="#">News</a></li>
-<li onClick={()=>setCategory('News')}><a className="dropdown-item" href="#">Sports</a></li>
-<li><a className="dropdown-item" href="#">Politics</a></li>
- <li><a className="dropdown-item" href="#">General Knowledge</a></li>
-<li><a className="dropdown-item" href="#">Entertainment</a></li>
-<li><a className="dropdown-item" href="#">Science</a></li>
-<li><a className="dropdown-item" href="#">Technology</a></li>
-<li><a className="dropdown-item" href="#">Gaming</a></li>
-<li><a className="dropdown-item" href="#">Trending</a></li>
-<li><a className="dropdown-item" href="#">Fashion</a></li> */}
 
 function AddListing() {
   const [isSSR, setIsSSR] = useState(false);
@@ -48,7 +37,7 @@ function AddListing() {
   function fetchDataFromAPIGET() {
     if (typeof window !== "undefined") {
       (async () => {
-        const response = await fetch('http://localhost:8000/listing', {
+        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
           method: 'GET',
           headers: {
             accept: 'application/json',
@@ -63,7 +52,7 @@ function AddListing() {
   function fetchDataFromAPIGETOfUsers() {
     if (typeof window !== "undefined") {
       (async () => {
-        const response = await fetch('http://localhost:8000/user/', {
+        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user/', {
           method: 'GET',
           headers: {
             accept: 'application/json',
@@ -108,21 +97,6 @@ function AddListing() {
     //Getting user data from local storage
     if (typeof window !== "undefined" && isSignedIn == false && localStorage.getItem('signedInUserId') !== null) {
       setIsSignedIn(true);
-      //   let signedInUserId = localStorage.getItem("userID");
-      //   let signedInUserName = localStorage.getItem("userName");
-      //   let signedInUserPassword = localStorage.getItem("userPassword");
-      //   let signedInUserTimeRegistered = localStorage.getItem("userTimeRegistered");
-
-      //   let signedInUser = {
-      //     id: signedInUserId,
-      //     name: signedInUserName,
-      //     password: signedInUserPassword,
-      //     timeRegistered: signedInUserTimeRegistered
-      //   }
-      //   setLoggedInUserData(signedInUser);
-
-      //   console.log("signedInUser: -=-=-=-=> ", signedInUser);
-      // }
     }
     else {
       console.log("User is not signed in yet Nor is there a user in local storage");
@@ -138,7 +112,7 @@ function AddListing() {
     e.preventDefault();
     if (category !== '' && title !== '' && description !== '' && loggedUserData !== null) {
       e.preventDefault();
-      const response = await fetch('http://localhost:8000/listing', {
+      const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -235,7 +209,7 @@ function AddListing() {
                         </>
                       ) : (
                         <>
-                          <h3 className="text-success text-center">No Public or Private List Found. You can add one here <a href="/AddListing">Add Listing</a></h3>
+                          <h3 className="text-success text-center">No Public or Private List Found. You can add one here <Link href="/AddListing">Add Listing</Link></h3>
                         </>
                       )}
                     </div>
@@ -243,7 +217,7 @@ function AddListing() {
                     <div>
                       <div className="text-center">
                         <h4 className='text-center text-dark mt-4'>Welcome Anonymous User! You are not logged In</h4>
-                        <a href="/Login">Login Now</a>
+                        <Link href="/Login">Login Now</Link>
                       </div>
                       <br />
                       {(listingList.length > 0) ? (
@@ -257,7 +231,6 @@ function AddListing() {
                                     <div className="containerListing">
                                       <ListContainer
                                         index={index}
-
                                         //VALUES
                                         id={item.id}
                                         title={item.title}
@@ -269,53 +242,23 @@ function AddListing() {
 
                                         //OTER Important Props
                                         userWhoCommented={null}
-                                      //FUNCTIONS
-                                      // listingList={listingList}
-                                      // setListingList={setListingList}
-                                      // userData={userData}
                                       />
-                                      {/* <ListContainer
-                                        id={item.id}
-                                        index={index}
-                                        // title={item.title}
-                                        // timeSubmitted={item.timeSubmitted}
-                                        // completed={item.completed}
-                                        // //Passing States
-                                        // todoList={todoList}
-                                        // setTodoList={setTodoList}
-                                        // isCompleted={isCompleted}
-                                        // setIsCompleted={setIsCompleted}
-                                        //VALUES
-                                        category={item.category}
-                                        title={item.title}
-                                        description={item.description}
-                                        isPublic={item.isPublic}
-                                        userWhoCreated={item.userWhoCreated}
-
-                                        //FUNCTIONS
-                                        listingList={listingList}
-                                        setListingList={setListingList}
-                                        userData={userData}
-                                      /> */}
-                                      {/* <h4>The id of the listing : {item.id}</h4>
-                                  <h4>The title of the listing : {item.title}</h4>
-                                  <h4>The listing is public: {item.isPublic.toLocaleString()}</h4>
-                                  <h4>The category of the listing : {item.category}</h4>
-                                  <h4>The description of the listing : {item.description}</h4>
-                                  <h4>The user who created the listing : {item.userWhoCreated}</h4>
-                                  <h4>The time the listing was created : {item.timeCreated}</h4> */}
                                     </div>
                                   ) : (
                                     <></>
                                   )}
                                 </div>
                               )
+
+
+
+
                             })
                           }
                         </>
                       ) : (
                         <>
-                          <h3 className="text-warning text-center">No Public List Found. You can add one here <a href="/AddListing">Add Listing</a></h3>
+                          <h3 className="text-warning text-center">No Public List Found. You can add one here <Link href="/AddListing">Add Listing</Link></h3>
                         </>
                       )}
                     </div>

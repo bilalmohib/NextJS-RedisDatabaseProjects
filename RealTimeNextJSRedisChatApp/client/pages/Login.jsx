@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import Router from 'next/router'
-import Image from 'next/image';
+import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
-import TodoList from '../Components/Home/ListContainer';
 
 function Login() {
     const [isSSR, setIsSSR] = useState(false);
@@ -38,7 +37,7 @@ function Login() {
     function fetchUsersData() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('http://localhost:8000/user', {
+                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -186,7 +185,7 @@ function Login() {
                                             <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
                                             {/* Register buttons */}
                                             <div className="text-center">
-                                                <p>Not a member? <a href="/Register">Register</a></p>
+                                                <p>Not a member? <Link href="/Register">Register</Link></p>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -195,32 +194,7 @@ function Login() {
                         ) : (
                             <h3>Login Page Window is undefined</h3>
                         )}
-
                         <br />
-
-                        {/* <div className='todoListContainer'>
-                            {
-                                todoList.map((item, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <TodoList
-                                                id={item.id}
-                                                index={index}
-                                                password={item.password}
-                                                timeSubmitted={item.timeSubmitted}
-                                                completed={item.completed}
-                                                //Passing States
-                                                todoList={todoList}
-                                                setTodoList={setTodoList}
-                                                isCompleted={isCompleted}
-                                                setIsCompleted={setIsCompleted}
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div> */}
-
                     </div>
                 </div >
             </div >
