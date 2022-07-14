@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import Router from 'next/router'
-import Link from "next/link";
+import Image from 'next/image';
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import TodoList from '../Components/Home/ListContainer';
 
 function Login() {
     const [isSSR, setIsSSR] = useState(false);
@@ -37,7 +38,7 @@ function Login() {
     function fetchUsersData() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
+                const response = await fetch('http://localhost:8000/user', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -119,7 +120,7 @@ function Login() {
     return (
         <div>
             <Head>
-                <title>DavesList</title>
+                <title>RealTimeChatApp</title>
             </Head>
 
             <Header />
@@ -129,7 +130,7 @@ function Login() {
                     <div className={`col-12`}>
                         <br /><br />
                         <br />
-                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based DavesList Login Form</h3>
+                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based ChatApp Login Form</h3>
                         <br />
 
                         {(isSSR) ? (
@@ -185,7 +186,7 @@ function Login() {
                                             <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
                                             {/* Register buttons */}
                                             <div className="text-center">
-                                                <p>Not a member? <Link href="/Register">Register</Link></p>
+                                                <p>Not a member? <a href="/Register">Register</a></p>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -194,7 +195,32 @@ function Login() {
                         ) : (
                             <h3>Login Page Window is undefined</h3>
                         )}
+
                         <br />
+
+                        {/* <div className='todoListContainer'>
+                            {
+                                todoList.map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <TodoList
+                                                id={item.id}
+                                                index={index}
+                                                password={item.password}
+                                                timeSubmitted={item.timeSubmitted}
+                                                completed={item.completed}
+                                                //Passing States
+                                                todoList={todoList}
+                                                setTodoList={setTodoList}
+                                                isCompleted={isCompleted}
+                                                setIsCompleted={setIsCompleted}
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div> */}
+
                     </div>
                 </div >
             </div >

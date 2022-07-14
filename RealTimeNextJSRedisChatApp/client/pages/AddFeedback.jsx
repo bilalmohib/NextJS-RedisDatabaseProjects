@@ -18,16 +18,16 @@ import Footer from '../Components/Footer';
 <li><a className="dropdown-item" href="#">Fashion</a></li> */}
 
 let Category = [
-    "News",
-    "Sports",
-    "Politics",
-    "General Knowledge",
-    "Entertainment",
-    "Science",
-    "Technology",
-    "Gaming",
-    "Trending",
-    "Fashion"
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
 ]
 
 function AddListing() {
@@ -59,7 +59,7 @@ function AddListing() {
     function fetchDataFromAPIGET() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
+                const response = await fetch('http://localhost:8000/listing', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -74,7 +74,7 @@ function AddListing() {
     function fetchDataFromAPIGETOfUsers() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user/', {
+                const response = await fetch('http://localhost:8000/user/', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -117,7 +117,7 @@ function AddListing() {
         if (JSON.parse(localStorage.getItem('loggedInUserData')) !== null && typeof window !== "undefined") {
             if (category !== '' && title !== '' && description !== '' && loggedUserData !== null) {
                 e.preventDefault();
-                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
+                const response = await fetch('http://localhost:8000/listing', {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -155,7 +155,7 @@ function AddListing() {
     return (
         <div>
             <Head>
-                <title>DavesList</title>
+                <title>RealTimeChatApp</title>
             </Head>
 
             <Header />
@@ -164,20 +164,20 @@ function AddListing() {
                 <div className={`row`}>
                     <div className={`col-12`}>
                         <br /><br /><br />
-                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based DavesList Add Listing</h3>
+                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based ChatApplication | Add Feedback</h3>
                         <br />
                         <form className='form_styling' onSubmit={addlistdata}>
                             <fieldset>
-                                <legend className="text-center text-primary">Add Listing Data Here</legend>
+                                <legend className="text-center text-primary">Add Your Feedback About Chat Application Here</legend>
 
                                 <br />
                                 <br />
 
                                 {/* Select Category */}
-                                <h6><span className="text-danger">*</span> Selected Category : {category}</h6>
+                                <h6><span className="text-danger">*</span> Selected Score : {category}</h6>
                                 <div className="dropdown">
                                     <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false">
-                                        Category
+                                        Score
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         {
@@ -196,7 +196,7 @@ function AddListing() {
 
                                 {/* Choose that is the Listing Is Public or Private Listing? */}
                                 <div>
-                                    <h5 className="text-left" style={{ fontWeight: "lighter" }}>Choose that is the Listing Is Public or Private Listing? <span className="text-danger">*</span></h5>
+                                    <h5 className="text-left" style={{ fontWeight: "lighter" }}>Choose that is the Feedback Is Public or Private Listing? <span className="text-danger">*</span></h5>
                                     <div className="form-check form-check-inline">
                                         <input className="form-check-input" type="radio" onChange={() => setIsPublic(true)} value={isPublic} checked={isPublic} name="Public" id="Public" />
                                         <label className="form-check-label" htmlFor="Public">Public</label>
@@ -223,12 +223,12 @@ function AddListing() {
                                 {(category !== '' && title !== '' && description !== '' && loggedUserData !== null) ? (
                                     <>
                                         <h5 className="text-success">You are ready to post</h5>
-                                        <button type="submit" className="btn btn-primary btn-block mb-4">Add Listing to Cloud</button>
+                                        <button type="submit" className="btn btn-primary btn-block mb-4">Add Feedback to Cloud</button>
                                     </>
                                 ) : (
                                     <>
                                         <h5 className="text-danger">Please fill out all the fields with * to submit the form</h5>
-                                        <button type="submit" className="btn btn-primary btn-block mb-4" disabled={true}>Add Listing to Cloud</button>
+                                        <button type="submit" className="btn btn-primary btn-block mb-4" disabled={true}>Add Feedback to Cloud</button>
                                     </>
                                 )}
 

@@ -24,6 +24,7 @@
 .text-name-user:hover{
     color: #fff;
     font-weight: normal;
-    transform: scale(1.1);
-    transition: all 0.2s ease-in-out;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
 }

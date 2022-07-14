@@ -146,13 +146,13 @@ const ListContainer = (props) => {
 
     return (
         <div className="todoList">
-            <h4><b>The id of the listing</b> : {id}</h4>
-            <h4><b>The title of the listing</b> : {title}</h4>
-            <h4><b>The listing is public</b> : {isPublic.toLocaleString()}</h4>
-            <h4><b>The category of the listing</b> : {category}</h4>
-            <h4><b>The description of the listing</b> : {description}</h4>
-            <h4><b>The user who created the listing</b> : {userWhoCreated}</h4>
-            <h4><b>The time the listing was created</b> : {timeCreated}</h4>
+            <h4><b>The id of the Feedback</b> : {id}</h4>
+            <h4><b>The title of the Feedback</b> : {title}</h4>
+            <h4><b>The Feedback is public</b> : {isPublic.toLocaleString()}</h4>
+            <h4><b>The category of the feedback</b> : {category}</h4>
+            <h4><b>The description of the feedback</b> : {description}</h4>
+            <h4><b>The user who gave the feedback</b> : {userWhoCreated}</h4>
+            <h4><b>The time the feedback was given</b> : {timeCreated}</h4>
 
             <section className="d-flex justify-content-center">
                 <button className="btn btn-danger mt-2" style={{ letterSpacing: 3 }} onClick={() => deleteListing(id)}>Delete Listing</button>

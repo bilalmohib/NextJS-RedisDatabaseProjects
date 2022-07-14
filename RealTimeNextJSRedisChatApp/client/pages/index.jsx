@@ -1,280 +1,341 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import Link from "next/link";
+import Image from 'next/image';
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ListContainer from '../Components/Home/ListContainer';
+import UsersList from "../Components/Chat/UsersList";
 
-function AddListing() {
-  const [isSSR, setIsSSR] = useState(false);
+function Home() {
+    const [isSSR, setIsSSR] = useState(false);
 
-  const [listingList, setListingList] = useState([]);
+    const [chatList, setChatList] = useState([]);
 
-  //VALUES
-  // category: this.category,
-  // title: this.title,
-  // description: this.description,
-  // isPublic: this.isPublic,
-  // userWhoCreated: this.userWhoCreated,
+    const [currentSelectedUser, setCurrentSelectedUser] = useState(null);
 
-  const [category, setCategory] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [isPublic, setIsPublic] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [loggedInUserData, setLoggedInUserData] = useState(null);
-  const [isSignedIn, setIsSignedIn] = useState(false);
+    //VALUES
+    // userIDSender: this.userIDSender,
+    // userNameSender: this.userNameSender,
+    // userIDReceiver: this.userIDReceiver,
+    // userNameReceiver: this.userNameReceiver,
+    // message:this.message,
+    // timeSent:this.timeSent,
+    // isUserOnline:this.isUserOnline
 
-  useEffect(() => {
-    fetchDataFromAPIGET();
+    const [message, setMessage] = useState('');
+    //VALUES
 
-    fetchDataFromAPIGETOfUsers();
+    const [userData, setUserData] = useState(null);
+    const [loggedInUserData, setLoggedInUserData] = useState(null);
+    const [isSignedIn, setIsSignedIn] = useState(false);
 
-    // setLoggedInUserData(loggedUserData);
-  }, []);
+    useEffect(() => {
+        //For Realtime Updates
+        setInterval(() => {
+            fetchDataFromAPIGetChat();
+            fetchDataFromAPIGETOfUsers();
+        }, 1000);
+        // setLoggedInUserData(loggedUserData);
+    }, []);
 
-  function fetchDataFromAPIGET() {
-    if (typeof window !== "undefined") {
-      (async () => {
-        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-          }
-        });
-        const content = await response.json();
-        setListingList(content);
-      })();
-    }
-  }
-
-  function fetchDataFromAPIGETOfUsers() {
-    if (typeof window !== "undefined") {
-      (async () => {
-        const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user/', {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-          }
-        });
-        const content = await response.json();
-        setUserData(content);
-      })();
-    }
-  }
-
-  function getLoggedInUserData() {
-    console.log("user data: ", userData);
-    if (userData !== null) {
-      for (let i = 0; i < userData.length; i++) {
-        if (userData[i].isSignedIn === true) {
-          console.log("userData Specific is equal to : ", userData[i]);
-          // setLoggedInUserData(userData[i]);
-          return userData[i];
+    function fetchDataFromAPIGetChat() {
+        if (typeof window !== "undefined") {
+            (async () => {
+                const response = await fetch('http://localhost:8000/chat', {
+                    method: 'GET',
+                    headers: {
+                        accept: 'application/json',
+                    }
+                });
+                const content = await response.json();
+                setChatList(content);
+            })();
         }
-      }
-    }
-    else {
-      console.log("userData is null");
-    }
-  }
-
-  useEffect(() => {
-    console.log(`The Listing Data is equal to : `, listingList);
-    console.log('The User Data is equal to : ', userData);
-    console.log('The Logged In User Data is equal to : ', loggedUserData);
-
-    if (typeof window !== "undefined") {
-      setIsSSR(true);
-    }
-    else {
-      setIsSSR(false);
     }
 
-    console.log("The signedIn User is equal to :-=-=-=-=-=-= OBJ=> ", getLoggedInUserData("loggedInUserData"));
-
-    //Getting user data from local storage
-    if (typeof window !== "undefined" && isSignedIn == false && localStorage.getItem('signedInUserId') !== null) {
-      setIsSignedIn(true);
+    function fetchDataFromAPIGETOfUsers() {
+        if (typeof window !== "undefined") {
+            (async () => {
+                const response = await fetch('http://localhost:8000/user/', {
+                    method: 'GET',
+                    headers: {
+                        accept: 'application/json',
+                    }
+                });
+                const content = await response.json();
+                setUserData(content);
+            })();
+        }
     }
-    else {
-      console.log("User is not signed in yet Nor is there a user in local storage");
+
+    function getLoggedInUserData() {
+        console.log("user data: ", userData);
+        if (userData !== null) {
+            for (let i = 0; i < userData.length; i++) {
+                if (userData[i].isSignedIn === true) {
+                    console.log("userData Specific is equal to : ", userData[i]);
+                    // setLoggedInUserData(userData[i]);
+                    return userData[i];
+                }
+            }
+        }
+        else {
+            console.log("userData is null");
+        }
     }
-    //Getting user data from local storage
-  })
 
-  let loggedUserData = null;
-  loggedUserData = getLoggedInUserData();
-  console.log("loggedUserData : ", loggedUserData);
+    useEffect(() => {
+        console.log(`The Chat List is equal to : `, chatList);
+        console.log('The User Data is equal to : ', userData);
+        console.log('The Logged In User Data is equal to : ', loggedUserData);
 
-  const addlistdata = async (e) => {
-    e.preventDefault();
-    if (category !== '' && title !== '' && description !== '' && loggedUserData !== null) {
-      e.preventDefault();
-      const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/listing', {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: category,
-          title: title,
-          description: description,
-          isPublic: isPublic,
-          userWhoCreated: loggedUserData.name,
-          timeCreated: new Date().toLocaleString()
-        })
-      });
+        if (typeof window !== "undefined") {
+            setIsSSR(true);
+        }
+        else {
+            setIsSSR(false);
+        }
 
-      // Fetch the one list data from the API after the POST request
-      const listing = await response.json();
-      // console.log(listing);
+        console.log("The signedIn User is equal to :-=-=-=-=-=-= OBJ=> ", getLoggedInUserData("loggedInUserData"));
 
-      setListingList([...listingList, listing]);
-    } else {
-      alert('Please fill all the fields to add a new listing to the api');
+        //Getting user data from local storage
+        if (typeof window !== "undefined" && isSignedIn == false && localStorage.getItem('signedInUserId') !== null) {
+            setIsSignedIn(true);
+        }
+        else {
+            console.log("User is not signed in yet Nor is there a user in local storage");
+        }
+        //Getting user data from local storage
+    })
+
+    let loggedUserData = null;
+    loggedUserData = getLoggedInUserData();
+    console.log("loggedUserData : ", loggedUserData);
+
+    const sendMessage = async () => {
+        // userIDSender: this.userIDSender,
+        // userNameSender: this.userNameSender,
+        // userIDReceiver: this.userIDReceiver,
+        // userNameReceiver: this.userNameReceiver,
+        // message:this.message,
+        // timeSent:this.timeSent,
+        // isUserOnline:this.isUserOnline
+
+        if (message !== '' && currentSelectedUser !== null && localStorage.getItem('loggedInUserData') !== null && isSSR === true) {
+            const response = await fetch('http://localhost:8000/chat', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userIDSender: JSON.parse(localStorage.getItem('loggedInUserData')).id,
+                    userNameSender: JSON.parse(localStorage.getItem('loggedInUserData')).name,
+                    userIDReceiver: currentSelectedUser.id,
+                    userNameReceiver: currentSelectedUser.name,
+                    message: message,
+                    timeSent: new Date().toLocaleString(),
+                    isUserOnline: true
+                })
+            }).catch((error) => {
+                alert("Error Sending the message : " + error);
+                console.log("Error Sending the message: ", error);
+            })
+
+            // Fetch the one list data from the API after the POST request
+            const messaging = await response.json();
+
+            setChatList([...chatList, messaging]);
+            alert("Message Sent Successfully");
+            setMessage('');
+        } else {
+            alert('Please fill all the fields to send a new message');
+        }
     }
-    alert("Listing Data Added Successfully");
-  }
 
-  return (
-    <div>
-      <Head>
-        <title>DavesList</title>
-      </Head>
+    return (
+        <div>
+            <Head>
+                <title>RealTimeChatApp</title>
+            </Head>
 
-      <Header />
+            <Header />
 
-      <div className={`container`}>
-        <div className={`row`}>
-          <div className={`col-12`}>
-            <br /><br /><br />
-            <h3 className='text-center text-dark mt-4'>NextJS & Redis Based DavesList | Home</h3>
-            <br />
-
-            <div className='listContainer'>
-              {(isSSR) ? (
-                <>
-                  {(localStorage.getItem('loggedInUserData') !== null || isSignedIn !== false) ? (
-                    <div>
-                      <h4 className='text-center text-dark mt-4'>Welcome {JSON.parse(localStorage.getItem('loggedInUserData')).name}! You are logged In</h4>
-
-                      <div className="text-center mb-4 mt-4">
-                        <button className='btn btn-danger'
-                          onClick={() => {
-                            localStorage.removeItem('loggedInUserData');
-                            setIsSignedIn(false);
-                            window.location.reload();
-                            alert("You are logged out Successfully!");
-                            // setLoggedInUserData(null);
-                            // Router.push('/');
-                          }}
-                        >
-                          Logout
-                        </button>
-                      </div>
-
-                      {(listingList.length > 0) ? (
+            <div className="border">
+                <div className='chatContainer'>
+                    {(isSSR) ? (
                         <>
-                          <h3 className="text-success text-center">Showing Public and Private both</h3>
-                          <br />
-                          <div className='text-center'>
-                            {
-                              listingList.map((item, index) => {
-                                return (
-                                  <div className="containerListing" key={index}>
-                                    <ListContainer
-                                      index={index}
+                            {(localStorage.getItem('loggedInUserData') !== null || isSignedIn !== false) ? (
+                                <div>
+                                    {(userData !== null) ? (
+                                        <>
+                                            <div className='containerChattingSidebar'>
+                                                <h4 className='text-center text-dark mt-4'>👋 Welcome {JSON.parse(localStorage.getItem('loggedInUserData')).name}!</h4>
 
-                                      //VALUES
-                                      id={item.id}
-                                      title={item.title}
-                                      isPublic={item.isPublic}
-                                      category={item.category}
-                                      description={item.description}
-                                      userWhoCreated={item.userWhoCreated}
-                                      timeCreated={item.timeCreated}
+                                                <div className="text-center mb-4 mt-4">
+                                                    <button className='btn btn-danger'
+                                                        onClick={() => {
+                                                            localStorage.removeItem('loggedInUserData');
+                                                            setIsSignedIn(false);
+                                                            window.location.reload();
+                                                            alert("You are logged out Successfully!");
+                                                            // setLoggedInUserData(null);
+                                                            // Router.push('/');
+                                                        }}
+                                                    >
+                                                        Logout
+                                                    </button>
+                                                </div>
+                                                <h5 className="text-left mb-4" style={{ paddingLeft: "20px", paddingRight: "20px" }}>🔘 Select a User to start the chat</h5>
+                                                {
+                                                    userData.map((item, index) => {
+                                                        return (
+                                                            <div key={index}>
+                                                                {(userData.length >= 1) ? (
+                                                                    <>
+                                                                        {(item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
+                                                                            <div className="chatUsersBox" key={index}>
 
-                                      //OTER Important Props
-                                      userWhoCommented={JSON.parse(localStorage.getItem('loggedInUserData')).name}
-                                      //FUNCTIONS
-                                      listingList={listingList}
-                                      setListingList={setListingList}
-                                    // userData={userData}
-                                    />
-                                  </div>
-                                )
-                              })
-                            }
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <h3 className="text-success text-center">No Public or Private List Found. You can add one here <Link href="/AddListing">Add Listing</Link></h3>
-                        </>
-                      )}
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="text-center">
-                        <h4 className='text-center text-dark mt-4'>Welcome Anonymous User! You are not logged In</h4>
-                        <Link href="/Login">Login Now</Link>
-                      </div>
-                      <br />
-                      {(listingList.length > 0) ? (
-                        <>
-                          <h3 className="text-warning text-center">Showing Public Listings Only</h3>
-                          {
-                            listingList.map((item, index) => {
-                              return (
-                                <div key={index}>
-                                  {(item.isPublic === true) ? (
-                                    <div className="containerListing">
-                                      <ListContainer
-                                        index={index}
-                                        //VALUES
-                                        id={item.id}
-                                        title={item.title}
-                                        isPublic={item.isPublic}
-                                        category={item.category}
-                                        description={item.description}
-                                        userWhoCreated={item.userWhoCreated}
-                                        timeCreated={item.timeCreated}
+                                                                                <UsersList
+                                                                                    index={index}
+                                                                                    // name: this.name,
+                                                                                    // password: this.password,
+                                                                                    // timeRegistered: this.timeRegistered,
+                                                                                    // isSignedIn: this.isSignedIn
 
-                                        //OTER Important Props
-                                        userWhoCommented={null}
-                                      />
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
+                                                                                    //VALUES
+                                                                                    id={item.id}
+                                                                                    name={item.name}
+                                                                                    timeRegistered={item.timeRegistered}
+
+                                                                                    //OTER Important Props
+                                                                                    loggedInUserName={JSON.parse(localStorage.getItem('loggedInUserData')).name}
+                                                                                    //FUNCTIONS
+                                                                                    chatList={chatList}
+                                                                                    setChatList={setChatList}
+
+                                                                                    currentSelectedUser={currentSelectedUser}
+                                                                                    setCurrentSelectedUser={setCurrentSelectedUser}
+                                                                                // userData={userData}
+                                                                                />
+                                                                            </div>
+                                                                        ) : (
+                                                                            <></>
+                                                                        )}
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <h6 style={{ marginLeft: "2%", marginRight: "2%" }} className="text-info">Please add a user to chat with them.You can add here. <Link href="/Register">Add User</Link></h6>
+                                                                    </>
+                                                                )}
+
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                            <div className='containerChattingContainer'>
+                                                <div className="topChatSelectedUserInfoBox">
+                                                    <h3 className="text-primary mt-2 ml-2">&nbsp; Current User Selected to Chat = {(currentSelectedUser === null) ? ("No User Selected") : (currentSelectedUser.name)} </h3>
+                                                </div>
+                                                <div className="containerMainChat">
+                                                    <br /><br /><br />
+                                                    <div className="d-flex flex-row ml-2">
+                                                        <div>
+                                                            {(chatList !== null && isSSR === true) ? (
+                                                                <div>
+                                                                    {(currentSelectedUser !== null) ? (
+                                                                        <>
+                                                                            {
+                                                                                chatList.map((item, index) => {
+                                                                                    return (
+                                                                                        <div key={index} className="mt-2">
+                                                                                            {(item.userIDSender === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDReceiver === currentSelectedUser.id) ? (
+                                                                                                <>
+                                                                                                    <div className="insideMainContainerChatSender" key={index}>
+                                                                                                        <h3>Sent</h3>
+                                                                                                        <div className="chatBoxHeader">
+                                                                                                            <h5 className="text-primary">{item.userNameSender}</h5>
+                                                                                                            <h6 className="text-secondary">{item.timeSent}</h6>
+                                                                                                        </div>
+                                                                                                        <div className="chatBoxBody">
+                                                                                                            <p className="text-dark">{item.message}</p>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                            ) : (
+                                                                                                <></>
+                                                                                            )}
+
+                                                                                            {(item.userIDReceiver === JSON.parse(localStorage.getItem('loggedInUserData')).id && item.userIDSender === currentSelectedUser.id) ? (
+                                                                                                <>
+                                                                                                    <div className="insideMainContainerChatReceiver" key={index}>
+                                                                                                        <h3>Received</h3>
+                                                                                                        <div className="chatBoxHeader">
+                                                                                                            <h5 className="text-primary">{item.userNameSender}</h5>
+                                                                                                            <h6 className="text-secondary">{item.timeSent}</h6>
+                                                                                                        </div>
+                                                                                                        <div className="chatBoxBody">
+                                                                                                            <p className="text-dark">{item.message}</p>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                            ) : (
+                                                                                                <></>
+                                                                                            )}
+                                                                                        </div>
+                                                                                    )
+                                                                                })
+                                                                            }
+                                                                        </>
+                                                                    ) : (
+                                                                        <div>
+                                                                            <h5 className="text-center text-dark">No User Selected. Please select a user to chat</h5>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                <h3 className="text-primary">No Messages Yet</h3>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* <div className="d-flex flex-row-reverse mr-2">
+                                                        <div className="insideMainContainerChatReceiver">
+                                                            <h3>Message: Hello World</h3>
+                                                            <h6>Send by: Muhammad Bilal</h6>
+                                                            <h6>Time Sent : 20 July 2021</h6>
+                                                        </div>
+                                                    </div> */}
+
+                                                </div>
+                                                <div className="containerMessageInput">
+                                                    <input className="form-control messageInput" type="text" placeholder="Enter the message here .... " value={message} onChange={(e) => setMessage(e.target.value)} title="Enter" />
+                                                    <button className="btn btn-primary btn-lg" onClick={sendMessage}>Send <i className="fas fa-paper-plane"></i></button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h3 className="text-success text-center">No Users Here <a href="/AddListing">Register Here</a></h3>
+                                        </>
+                                    )}
                                 </div>
-                              )
-
-
-
-
-                            })
-                          }
+                            ) : (
+                                <div>
+                                    <div className="text-center">
+                                        <br /><br /><br /><br /><br /><br /><br /><br />
+                                        <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
+                                        <a href="/Login">Login Now</a>
+                                    </div>
+                                    <br />
+                                </div>
+                            )}
                         </>
-                      ) : (
-                        <>
-                          <h3 className="text-warning text-center">No Public List Found. You can add one here <Link href="/AddListing">Add Listing</Link></h3>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <h3>Login Page Window is undefined</h3>
-              )}
+                    ) : (
+                        <h3>Chat Page Window is undefined</h3>
+                    )}
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-
-      {/* <br /><br /><br /><br /> */}
-      <Footer />
-    </div>
-  )
+    )
 }
-export default AddListing;
+export default Home;

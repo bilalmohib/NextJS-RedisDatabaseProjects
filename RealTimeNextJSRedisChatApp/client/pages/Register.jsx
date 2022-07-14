@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Router from 'next/router'
 import Head from 'next/head';
-import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
@@ -57,7 +56,7 @@ function Register() {
     function fetchUsersData() {
         if (typeof window !== "undefined") {
             (async () => {
-                const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
+                const response = await fetch('http://localhost:8000/user', {
                     method: 'GET',
                     headers: {
                         accept: 'application/json',
@@ -99,7 +98,7 @@ function Register() {
     const registerUsersData = async (event) => {
         event.preventDefault();
         if (name !== '' && password !== '' && loggedUserData !== null && duplicate === false) {
-            const response = await fetch('https://redisdatabasebackend.as.r.appspot.com/user', {
+            const response = await fetch('http://localhost:8000/user', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -130,7 +129,7 @@ function Register() {
     return (
         <div>
             <Head>
-                <title>DavesList</title>
+                <title>RealTimeChatApp</title>
             </Head>
 
             <Header />
@@ -139,7 +138,7 @@ function Register() {
                 <div className={`row`}>
                     <div className={`col-12`}>
                         <br /><br /><br />
-                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based DavesList Registration Form</h3>
+                        <h3 className='text-center text-dark mt-4'>NextJS & Redis Based ChatApp Registration Form</h3>
                         <br />
                         <form className='form_styling' onSubmit={registerUsersData}>
                             <fieldset>
@@ -175,7 +174,7 @@ function Register() {
                                 <button type="submit" className="btn btn-primary btn-block mb-4">Register</button>
                                 {/* Register buttons */}
                                 <div className="text-center">
-                                    <p>Already Registered ? <Link href="/Login">Login</Link></p>
+                                    <p>Already Registered ? <a href="/Login">Login</a></p>
                                 </div>
                             </fieldset>
                         </form>
@@ -204,6 +203,7 @@ function Register() {
                                 })
                             }
                         </div> */}
+
                     </div>
                 </div>
             </div>

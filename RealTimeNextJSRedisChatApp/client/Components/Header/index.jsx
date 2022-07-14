@@ -21,12 +21,12 @@ const Header = () => {
                         <ul className="navbar-nav fill me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link href="/">
-                                    <a className="nav-link">Home</a>
+                                    <a className="nav-link">Chat</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/AddListing">
-                                    <a className="nav-link" title="Add Listing">Add Listing</a>
+                                <Link href="/AddFeedback">
+                                    <a className="nav-link" title="Add Listing">Add Feedback</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
@@ -40,8 +40,8 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/Chat">
-                                    <a className="nav-link" title="Register">Messaging</a>
+                                <Link href="/Feedback">
+                                    <a className="nav-link" title="Register">Feedback</a>
                                 </Link>
                             </li>
                         </ul>
