@@ -26,22 +26,22 @@ const Header = () => {
                             </li>
                             <li className="nav-item">
                                 <Link href="/AddFeedback">
-                                    <a className="nav-link" title="Add Listing">Add Feedback</a>
+                                    <a className="nav-link" href='#' title="Add Listing">Add Feedback</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link href="/Login">
-                                    <a className="nav-link" title="Login">Login</a>
+                                    <a className="nav-link" href='#' title="Login">Login</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link href="/Register">
-                                    <a className="nav-link" title="Register">Register</a>
+                                    <a className="nav-link" href='#' title="Register">Register</a>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link href="/Feedback">
-                                    <a className="nav-link" title="Register">Feedback</a>
+                                    <a className="nav-link" href='#' title="Register">Feedback</a>
                                 </Link>
                             </li>
                         </ul>
