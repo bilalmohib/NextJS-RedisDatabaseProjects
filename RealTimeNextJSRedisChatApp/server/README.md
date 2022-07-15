@@ -88,31 +88,6 @@ It performs the following operations:
     dataStructure: 'JSON'
   });
   ```
-- **listing** ——> The schema contains the  category, title, description, isPublic, userWhoCreated and timeCreated.As shown below:
-  ```js
-  export const listingSchema = new Schema(Listing, {
-    category: {
-        type: 'string'
-    },
-    title: {
-        type: 'string'
-    },
-    description: {
-        type: 'string'
-    },
-    isPublic: {
-        type: 'boolean'
-    },
-    userWhoCreated: {
-        type: 'string'
-    },
-    timeCreated: {
-        type: 'string'
-    }
-  }, {
-    dataStructure: 'JSON'
-  });
-  ```
   - **comment** ——> The schema contains the  listingID, comment, userWhoCommented and timeCommented. As shown below:
   ```js
   export const commentSchema = new Schema(Comment, {
@@ -165,7 +140,7 @@ It performs the following operations:
 - Download the repository and run `npm install`. The node modules will be installed that are essential for running the project.
 - In the root of the project run `npm start`. This will start the server.
 - 😀 Congratulations. You definately did great if you followed till now.
-- Now you can use the apis along with the front end of DaveListApp.
+- Now you can use the apis along with the front end of ChatApplication.
 
 ## Find Me 
 - Follow me on [Linkedin](https://www.linkedin.com/in/muhammad-bilal-028843199/) for useful updates regarding development
