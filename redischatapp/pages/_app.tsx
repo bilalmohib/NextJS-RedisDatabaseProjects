@@ -1,21 +1,16 @@
+// File Relative Path: pages/_app.tsx
+
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 
-//Importing Containers CSS Files
-import '../styles/globals.css';
-import "../styles/ContainerCss/Home.css";
-import "../styles/ContainerCss/Chat.css";
+//Importing the styles
+import '../styles/globals.css'
 
-//Importing Component CSS Files
-import "../Components/Home/ListContainer/style.css";
-import "../Components/Footer/style.css";
-import "../Components/Header/style.css";
-import "../Components/Home/CommentContainer/style.css";
-import "../Components/Chat/UsersList/style.css";
-
-function MyApp({ Component, pageProps }) {
-  return <>
-    <Head>
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+     <Head>
       <meta charSet="utf-8" />
       <meta name="description" content="A chat app built with Next JS,redis,Node JS and Express" />
       <meta name="keywords" content="ChatApp,NextJS,Redis,NodeJS,Express,Realtime" />
@@ -30,7 +25,8 @@ function MyApp({ Component, pageProps }) {
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"
     ></Script>
-  </>
+    </>
+  )
 }
 
 export default MyApp;

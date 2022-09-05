@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import Head from 'next/head';
-import Router from 'next/router'
+import Router from 'next/router';
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 function Login() {
-    const [isSSR, setIsSSR] = useState(false);
-    if (typeof window !== "undefined") {
-        const { pathname } = Router
-    }
-    else {
-        console.log("Register Page Window is undefined");
-    }
-    ////////////////////////////////////////////////////////////////////////
-    const [usersList, setUsersList] = useState([]);
+    const [isSSR, setIsSSR] = useState<boolean>(false);
+    const [usersList, setUsersList] = useState<Array<any>>([]);
 
     // VALUES
     // user.name = req.body.name;
@@ -23,14 +16,13 @@ function Login() {
     // user.timeRegistered = req.body.timeRegistered;
     // user.isSignedIn = req.body.isSignedIn;
 
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [isSignedIn, setIsSignedIn] = useState(false);
-    const [loggedInUserData, setLoggedInUserData] = useState(null);
+    const [name, setName] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const [loggedInUserData, setLoggedInUserData] = useState<any>(null);
 
     useEffect(() => {
         fetchUsersData();
-        // setLoggedInUserData(loggedUserData);
     }, []);
 
     function fetchUsersData() {
@@ -67,15 +59,13 @@ function Login() {
         console.log(`The users usersList is equal to : `, usersList);
         console.log('The Logged In User Data is equal to : ', loggedUserData);
 
-        if (typeof window !== "undefined") {
+        if (typeof window !== "undefined" && isSSR === false) {
             setIsSSR(true);
         }
-        else {
-            setIsSSR(false);
-        }
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[isSSR]);
 
-    let loggedUserData = null;
+    let loggedUserData: any = null;
     loggedUserData = getLoggedInUserData();
     console.log("loggedUserData : ", loggedUserData);
 
@@ -83,7 +73,9 @@ function Login() {
 
 
 
-    const loginUser = async (e) => {
+    const loginUser = async (
+        e: FormEvent<HTMLFormElement>
+    ) => {
         e.preventDefault();
 
         for (let i = 0; i < usersList.length; i++) {
@@ -136,7 +128,8 @@ function Login() {
                             <>
                                 {(localStorage.getItem('loggedInUserData') !== null || loggedInUserData !== null) ? (
                                     <div>
-                                        <h4 className='text-center text-dark mt-4'>Welcome {JSON.parse(localStorage.getItem('loggedInUserData')).name}! You are logged In</h4>
+                                        {/* @ts-ignore: Object is possibly 'null'. */}
+                                        <h4 className='text-center text-dark mt-4'>Welcome {localStorage.getItem('loggedInUserData').name}! You are logged In</h4>
                                         <br />
                                         <div className='text-center'>
                                             <button className='btn btn-danger'
@@ -172,12 +165,12 @@ function Login() {
                                                 <div className="col d-flex justify-content-center">
                                                     {/* Checkbox */}
                                                     <div className="form-check">
-                                                        <input className="form-check-input" type="checkbox" defaultValue id="form2Example31" defaultChecked />
+                                                        <input className="form-check-input" type="checkbox" id="form2Example31" defaultChecked />
                                                         <label className="form-check-label" htmlFor="form2Example31"> Remember me </label>
                                                     </div>
                                                 </div>
                                                 <div className="col">
-                                                    {/* Simple link */}
+                                                    {/* Forget Password */}
                                                     <a href="#!">Forgot password?</a>
                                                 </div>
                                             </div>

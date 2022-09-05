@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import Image from 'next/image';
+import Link from "next/link";
 //Importing Compoents
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
@@ -69,6 +69,7 @@ function Home() {
         }
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     function getLoggedInUserData() {
         console.log("user data: ", userData);
         if (userData !== null) {
@@ -107,7 +108,7 @@ function Home() {
             console.log("User is not signed in yet Nor is there a user in local storage");
         }
         //Getting user data from local storage
-    })
+    }, [chatList, userData, loggedUserData, getLoggedInUserData, isSignedIn])
 
     let loggedUserData = null;
     loggedUserData = getLoggedInUserData();
@@ -189,7 +190,7 @@ function Home() {
                                                     userData.map((item, index) => {
                                                         return (
                                                             <div key={index}>
-                                                                {(userData.length >= 1) ? (
+                                                                {(userData.length >= 2) ? (
                                                                     <>
                                                                         {(item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
                                                                             <div className="chatUsersBox" key={index}>
@@ -324,7 +325,7 @@ function Home() {
                                     <div className="text-center">
                                         <br /><br /><br /><br /><br /><br /><br /><br />
                                         <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
-                                        <a href="/Login">Login Now</a>
+                                        <Link href="/Login">Login Now</Link>
                                     </div>
                                     <br />
                                 </div>
