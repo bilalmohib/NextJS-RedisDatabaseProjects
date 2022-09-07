@@ -170,7 +170,7 @@ function Register() {
                                 </div>
                                 {/* Checked checkbox */}
                                 <div className="form-check mb-4">
-                                    <input className="form-check-input" type="checkbox" value={isSignedIn} onChange={() => setIsSignedIn(!isSignedIn)} id="flexCheckChecked" />
+                                    <input className="form-check-input" type="checkbox" checked={isSignedIn} onChange={() => setIsSignedIn(!isSignedIn)} id="flexCheckChecked" />
                                     <label className="form-check-label" htmlFor="flexCheckChecked">Keep me Logged In</label>
                                 </div>
                                 {/* Submit button */}

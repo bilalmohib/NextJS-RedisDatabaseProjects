@@ -4,8 +4,17 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 
-//Importing the styles
-import '../styles/globals.css'
+//Importing Containers CSS Files
+import '../styles/globals.css';
+import "../styles/ContainerCss/Home.css";
+import "../styles/ContainerCss/Chat.css";
+
+//Importing Component CSS Files
+// import "../Components/Home/ListContainer/style.css";
+import "../Components/Footer/style.css";
+import "../Components/Header/style.css";
+// import "../Components/Home/CommentContainer/style.css";
+import "../Components/Chat/UsersList/style.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

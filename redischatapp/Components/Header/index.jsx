@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
     return (
@@ -15,7 +16,7 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         {/* Navbar brand */}
                         <a className="navbar-brand mt-2 mt-lg-0" href="#">
-                            <img src="/logo.png" height={45} title="Redis :) The most loved developers database." alt="Redis" loading="lazy" />
+                            <Image src="/logo.png" width={45} height={45} title="Redis :) The most loved developers database." alt="Redis" loading="lazy" />
                         </a>
                         {/* Left links */}
                         <ul className="navbar-nav fill me-auto mb-2 mb-lg-0">
@@ -52,12 +53,12 @@ const Header = () => {
                     <div className="d-flex align-items-center">
                         {/* Icon */}
                         <a className="text-reset me-3" title="Learn With Redis University" target="_blank" href="https://university.redis.com/" rel="noreferrer">
-                            <img src="https://download.logo.wine/logo/Redis/Redis-Logo.wine.png" className="rounded-circle" height={50} alt="Muhammad Bilal" title="Muhammad Bilal" loading="lazy" />
+                            <Image src="https://download.logo.wine/logo/Redis/Redis-Logo.wine.png" className="rounded-circle" width={50} height={50} alt="Muhammad Bilal" title="Muhammad Bilal" loading="lazy" />
                         </a>
                         {/* Avatar */}
                         <div className="dropdown">
                             <a className="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                                <img src="https://media-exp2.licdn.com/dms/image/C4D03AQEXk-Oc_il_Jw/profile-displayphoto-shrink_200_200/0/1624098249818?e=1661385600&v=beta&t=0-YbW3xzYac9E5BEJJ0ShrHJsDOfw2XXoVAyfSpDhmE" className="rounded-circle" height={25} alt="Muhammad Bilal" title="Muhammad Bilal" loading="lazy" />
+                                <Image src="https://avatars.githubusercontent.com/u/59303181?v=4" className="rounded-circle" width={25} height={25} alt="Muhammad Bilal" title="Muhammad Bilal" loading="lazy" />
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                                 <li>
