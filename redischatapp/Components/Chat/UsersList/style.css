@@ -1,0 +1,30 @@
+.userChatSidebarDiv{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #c6bdfc;
+    border-right: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid hsl(0, 0%, 89%);
+    border-left: 1px solid #e3e3e3;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    box-shadow: none !important;
+}
+.text-name-user{
+    font-size: 18px;
+    border: 0.3px solid rgb(222, 222, 222) !important;
+    padding-left: 10px;
+    line-height: 40px;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: none !important;
+}
+.text-name-user:hover{
+    color: #fff;
+    font-weight: normal;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+}
