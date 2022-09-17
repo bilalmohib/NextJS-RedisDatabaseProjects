@@ -86,6 +86,10 @@ function Home() {
         }
     }
 
+    let loggedUserData = null;
+    loggedUserData = getLoggedInUserData();
+    console.log("loggedUserData : ", loggedUserData);
+
     useEffect(() => {
         console.log(`The Chat List is equal to : `, chatList);
         console.log('The User Data is equal to : ', userData);
@@ -109,10 +113,6 @@ function Home() {
         }
         //Getting user data from local storage
     }, [chatList, userData, loggedUserData, getLoggedInUserData, isSignedIn])
-
-    let loggedUserData = null;
-    loggedUserData = getLoggedInUserData();
-    console.log("loggedUserData : ", loggedUserData);
 
     const sendMessage = async () => {
         // userIDSender: this.userIDSender,
@@ -194,7 +194,6 @@ function Home() {
                                                                     <>
                                                                         {(item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
                                                                             <div className="chatUsersBox" key={index}>
-
                                                                                 <UsersList
                                                                                     index={index}
                                                                                     // name: this.name,

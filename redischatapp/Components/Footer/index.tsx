@@ -1,3 +1,5 @@
+// Relative Path : Components\Footer\index.tsx
+
 const Footer = () => {
     return (
         <div className="footer">

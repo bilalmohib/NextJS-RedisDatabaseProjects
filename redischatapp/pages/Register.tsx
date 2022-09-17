@@ -1,3 +1,5 @@
+// Relative Path : pages\Register.tsx
+
 import { useEffect, useState } from "react";
 import Router from 'next/router'
 import Head from 'next/head';
@@ -183,29 +185,6 @@ function Register() {
                         </form>
 
                         <br />
-
-                        {/* <div className='todoListContainer'>
-                            {
-                                todoList.map((item, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <TodoList
-                                                id={item.id}
-                                                index={index}
-                                                title={item.title}
-                                                timeSubmitted={item.timeSubmitted}
-                                                completed={item.completed}
-                                                //Passing States
-                                                todoList={todoList}
-                                                setTodoList={setTodoList}
-                                                isCompleted={isCompleted}
-                                                setIsCompleted={setIsCompleted}
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div> */}
 
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 import { Entity, Schema } from "redis-om";
-
 class Chat extends Entity {
     toJSON() {
         return {
@@ -16,7 +15,7 @@ class Chat extends Entity {
     }
 }
 
-//Note: Remember here the commentSchema you are adding you have to keep the pattern same everywhere.You can change add more entities or offcourse remove some of them
+//Note: Remember here the chatSchema you are adding you have to keep the pattern same everywhere.You can change add more entities or offcourse remove some of them
 export const chatSchema = new Schema(Chat, {
     userIDSender: {
         type: 'string'

@@ -1,3 +1,7 @@
+/* 
+   Relative Path : styles\ContainerCss\Chat.css 
+*/
+
 .containerChattingSidebar {
     width: 20%;
     margin-top: 72px;
@@ -54,7 +58,7 @@
     top: 72px;
 }
 
-.containerMainChat{
+.containerMainChat {
     padding-left: 2%;
     padding-right: 2%;
 }

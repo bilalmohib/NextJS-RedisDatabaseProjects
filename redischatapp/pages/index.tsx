@@ -1,6 +1,7 @@
+// Relative Path: pages\index.tsx
+
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 //Importing Compoents
 import Header from '../Components/Header';
@@ -8,10 +9,9 @@ import Footer from '../Components/Footer';
 import UsersList from "../Components/Chat/UsersList";
 
 function Home() {
+
   const [isSSR, setIsSSR] = useState<boolean>(false);
-
   const [chatList, setChatList] = useState<any>([]);
-
   const [currentSelectedUser, setCurrentSelectedUser] = useState<any>(null);
 
   //VALUES
@@ -314,13 +314,15 @@ function Home() {
                             </div>
                           </div>
 
-                          {/* <div className="d-flex flex-row-reverse mr-2">
-                                                        <div className="insideMainContainerChatReceiver">
-                                                            <h3>Message: Hello World</h3>
-                                                            <h6>Send by: Muhammad Bilal</h6>
-                                                            <h6>Time Sent : 20 July 2021</h6>
-                                                        </div>
-                                                    </div> */}
+                          {/* 
+                              <div className="d-flex flex-row-reverse mr-2">
+                                <div className="insideMainContainerChatReceiver">
+                                    <h3>Message: Hello World</h3>
+                                    <h6>Send by: Muhammad Bilal</h6>
+                                    <h6>Time Sent : 20 July 2021</h6>
+                                </div>
+                              </div> 
+                          */}
 
                         </div>
                         <div className="containerMessageInput">
@@ -342,7 +344,8 @@ function Home() {
                     <h4 className='text-center text-dark mt-4'>Please Register or Login to Chat with other registered users</h4>
                     <Link href="/Login">Login Now</Link>
                   </div>
-                  <br />
+                  <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                  <Footer />
                 </div>
               )}
             </>

@@ -10,10 +10,8 @@ import "../styles/ContainerCss/Home.css";
 import "../styles/ContainerCss/Chat.css";
 
 //Importing Component CSS Files
-// import "../Components/Home/ListContainer/style.css";
 import "../Components/Footer/style.css";
 import "../Components/Header/style.css";
-// import "../Components/Home/CommentContainer/style.css";
 import "../Components/Chat/UsersList/style.css";
 
 function MyApp({ Component, pageProps }: AppProps) {

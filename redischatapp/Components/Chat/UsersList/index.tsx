@@ -1,6 +1,20 @@
+// Relative Path : Components\Chat\UsersList\index.tsx
+
 import React, { useState, useEffect } from 'react';
 
-const UsersList = (props) => {
+interface PropsType {
+    index: number;
+    id: number;
+    name: string;
+    timeRegistered: string;
+    loggedInUserName: string;
+    chatList: any;
+    setChatList: any;
+    currentSelectedUser: any;
+    setCurrentSelectedUser: any;
+}
+
+const UsersList: React.FC<PropsType> = (props) => {
     // id={item.id}
     // name={item.name}
     // timeRegistered={item.timeRegistered}

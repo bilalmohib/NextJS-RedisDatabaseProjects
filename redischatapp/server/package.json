@@ -1,0 +1,20 @@
+{
+  "name": "backendchatapp",
+  "version": "1.0.0",
+  "description": "This is the backend of the chat app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "redis",
+    "nodejs",
+    "expressjs",
+    "backend"
+  ],
+  "author": "Muhammad-Bilal-7896",
+  "license": "ISC"
+}

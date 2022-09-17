@@ -22,7 +22,7 @@ app.use(cors({
 //Note: I will explain how you can get your endpoint below.Add your username,endpoint and password here
 let username = "bilal";
 let password = "RedisJust101Hai)";
-let endPoint = "redis-14516.c100.us-east-1-4.ec2.cloud.redislabs.com:14516";
+let endPoint = "redis-17782.c299.asia-northeast1-1.gce.cloud.redislabs.com:17782";
 
 const client = new Client();
 await client.open(`redis://${username}:${password}@${endPoint}`);
@@ -295,6 +295,3 @@ app.listen(PORT, () => {
 // [END gae_node_request_example]
 
 export default app;
-// app.listen(8000, () => {
-//     console.log("Redis Backend started on port 8000...");
-// });

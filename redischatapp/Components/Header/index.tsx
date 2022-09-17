@@ -1,3 +1,5 @@
+// Relative Path : Components\Header\index.jsx
+
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -25,11 +27,11 @@ const Header = () => {
                                     <a className="nav-link">Chat</a>
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link href="/AddFeedback">
                                     <a className="nav-link" href='#' title="Add Listing">Add Feedback</a>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                                 <Link href="/Login">
                                     <a className="nav-link" href='#' title="Login">Login</a>
@@ -40,11 +42,11 @@ const Header = () => {
                                     <a className="nav-link" href='#' title="Register">Register</a>
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link href="/Feedback">
                                     <a className="nav-link" href='#' title="Register">Feedback</a>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                         {/* Left links */}
                     </div>
@@ -78,7 +80,6 @@ const Header = () => {
                 {/* Container wrapper */}
             </nav>
             {/* Navbar */}
-
         </>
     )
 }
