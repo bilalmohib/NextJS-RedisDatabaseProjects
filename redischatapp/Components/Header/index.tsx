@@ -1,4 +1,4 @@
-// Relative Path : Components\Header\index.jsx
+// Relative Path : Components\Header\index.tsx
 
 import Link from 'next/link';
 import Image from 'next/image';

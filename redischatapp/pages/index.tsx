@@ -202,7 +202,6 @@ function Home() {
                                       // @ts-ignore
                                       (item.id !== JSON.parse(localStorage.getItem('loggedInUserData')).id) ? (
                                         <div className="chatUsersBox" key={index}>
-
                                           <UsersList
                                             index={index}
                                             // name: this.name,
