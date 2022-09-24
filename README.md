@@ -18,6 +18,5 @@ The following is the list of projects this repository contains:-
 ## 1) Chat Application
 https://user-images.githubusercontent.com/59303181/178955431-2f7c5817-a1af-4e3d-a992-0b028ba45fcc.mp4
 - [Source Code](https://github.com/Muhammad-Bilal-7896/NextJS-RedisDatabaseProjects/tree/master/RealTimeNextJSRedisChatApp)
-<!-- - [Live Preview In Progress]()
-- [Blog In Working]() -->
+- [Blog](https://www.linkedin.com/pulse/how-develop-realtime-chat-app-using-redisjson-next-js-muhammad-bilal/?trackingId=mqQNryKXSYGMWu0uHyh1RQ%3D%3D)
 
